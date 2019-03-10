@@ -2,7 +2,7 @@ using System;
 
 namespace Domain
 {
-    public class Source
+    public class Source : Value
     {
         [Key, Required]
         public string Name { get; set; }
@@ -17,10 +17,14 @@ namespace Domain
 
         protected Source() { }
 
-        private static void NullCheck(string value)
+        protected override bool EqualsCore(T other)
         {
-            if (string.IsNullOrEmpty(value))
-                throw new ArgumentNullException($"Parameter {nameof(value)} cannot be null or empty");
+            return this.Name.Equals(other.Name);
+        }
+
+        protected override int GetHashCodeCore()
+        {
+            return this.Name.GetHashCode();
         }
     }
 }

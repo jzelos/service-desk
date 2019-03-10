@@ -48,11 +48,5 @@ namespace Domain
 
             this.Items.Remove(item);
         }
-
-        private static void NullCheck(string value)
-        {
-            if (string.IsNullOrEmpty(value))
-                throw new ArgumentNullException($"Parameter {nameof(value)} cannot be null or empty");
-        }
     }
 }

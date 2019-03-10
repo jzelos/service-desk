@@ -184,12 +184,6 @@ namespace Domain
             this.Item = item;
         }
 
-        private static void NullCheck(string value)
-        {
-            if (string.IsNullOrEmpty(value))
-                throw new ArgumentNullException($"Parameter {nameof(value)} cannot be null or empty");
-        }
-
         private void ReadOnlyCheck()
         {
             if (this.IsReadOnly)

@@ -41,5 +41,11 @@ namespace Domain
         {
             return (GetType().ToString() + Id).GetHashCode();
         }
+        
+        protected static void NullCheck(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                throw new ArgumentNullException($"Parameter {nameof(value)} cannot be null or empty");
+        }
     }
 }

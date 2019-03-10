@@ -13,7 +13,6 @@ namespace Domain
         // Lists
         public DbSet<Category> Categories { get; set; }
         public DbSet<Source> Sources { get; set; }
-//        public DbSet<Status> Statuses { get; set; }
     }
 
 }
