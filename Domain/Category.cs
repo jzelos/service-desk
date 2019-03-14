@@ -23,7 +23,7 @@ namespace Domain
             ticket.Subcategories = new List<Subcategory>();
         }
 
-        protected Category() { }
+        protected Category() { } // TODO Apparently not needed in EF core 2.1, can use parameterised constructor as long as names match (case difference is fine)
 
         // Commands
 

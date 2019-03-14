@@ -36,6 +36,11 @@ namespace Domain
 
                 return a.Equals(b);
         }
+        
+        public static bool operator !=(Value<T> a, Value<T> b)
+        {
+            return !(a == b);
+        }
 
         public override int GetHashCode()
         {

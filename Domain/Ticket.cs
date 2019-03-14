@@ -11,18 +11,16 @@ namespace Domain
         public string Assignee { get; private set; }
 
         public string Source { get; private set; }
-        public Status Status { get; private set; }
+        public Status Status { get; private set; } // TODO Use value conversion to store string and not enum in DB
 
         public string Summary { get; private set; }
         public string Description { get; private set; }
 
-        public string Category { get; private set; }
-        public string Subcategory { get; private set; }
-        public string Item { get; private set; }
+        public Categorisation Categorisation { get; private set; }
 
         public virtual ICollection<WorkLog> WorkLogs { get; set; }
 
-        public virtual ICollection<Document> Documents { get; set; }
+        public virtual ICollection<Document> Documents { get; set; } // TODO Switch all collections to use backing field and expose as readonly 
 
         public boolean IsReadOnly()
         {
@@ -34,32 +32,26 @@ namespace Domain
             string source,
             string summary,
             string description,
-            string category,
-            string subcategory,
-            string item)
+            Categorisation categorisation)
         {
             NullCheck(user);
             NullCheck(source);
             NullCheck(summary);
             NullCheck(description);
-            NullCheck(category);
-            NullCheck(subcategory);
-            NullCheck(item);
+            NullCheck(categorisation);            
 
             this.CreatedDate = DateTime.Now;
             this.Creator = user;
             this.Source = source;
             this.Summary = summary;
             this.Description = description;
-            this.Category = category;
-            this.Subcategory = subcategory;
-            this.Item = item;
+            this.Categorisation = categorisation;            
             this.Status = Status.Unassigned;
             ticket.Documents = new List<Document>();
             ticket.WorkLogs = new List<WorkLog>();
         }
 
-        protected Ticket() { }
+        protected Ticket() { } 
 
         // Commands
         public void AddDocument(string user, string filename, byte[] data)
@@ -166,22 +158,18 @@ namespace Domain
         }
 
         // UpdateTicket (CTI, Summary, Description)        
-        public void UpdateTicket(string source, string summary, string description, string category, string subcategory, string item)
+        public void UpdateTicket(string source, string summary, string description, Categorisation categorisation)
         {
             ReadOnlyCheck();
             NullCheck(source);
             NullCheck(summary);
             NullCheck(description);
-            NullCheck(category);
-            NullCheck(subcategory);
-            NullCheck(item);
+            NullCheck(categorisation);            
 
             this.Source = source;
             this.Summary = summary;
             this.Description = description;
-            this.Category = category;
-            this.Subcategory = subcategory;
-            this.Item = item;
+            this.Categorisation = categorisation;            
         }
 
         private void ReadOnlyCheck()
