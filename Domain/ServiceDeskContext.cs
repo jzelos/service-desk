@@ -1,10 +1,11 @@
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace Domain
 {
     public class ServiceDeskContext : DbContext
     {
-        public ServiceDeskContext(DbContextOptions<Context> options)
+        public ServiceDeskContext(DbContextOptions<ServiceDeskContext> options)
             : base(options)
         { }
         

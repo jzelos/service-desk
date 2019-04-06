@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain
 {
@@ -20,7 +22,7 @@ namespace Domain
             this.CreatedDate = DateTime.Now;
             this.Creator = user;
             this.Name = name;
-            ticket.Subcategories = new List<Subcategory>();
+            this.Subcategories = new List<Subcategory>();
         }
 
         protected Category() { } // TODO Apparently not needed in EF core 2.1, can use parameterised constructor as long as names match (case difference is fine)

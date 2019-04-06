@@ -1,8 +1,9 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain
 {
-    public class Source : Value
+    public class Source : Value<Source>
     {
         [Key, Required]
         public string Name { get; set; }
@@ -17,7 +18,7 @@ namespace Domain
 
         protected Source() { }
 
-        protected override bool EqualsCore(T other)
+        protected override bool EqualsCore(Source other)
         {
             return this.Name.Equals(other.Name);
         }

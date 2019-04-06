@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace Domain
@@ -13,7 +14,7 @@ namespace Domain
             NullCheck(category);
             NullCheck(subcategory);
 
-            this.Categoruy = category;
+            this.Category = category;
             this.Subcategory = subcategory;
         }
 

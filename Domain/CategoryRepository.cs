@@ -1,46 +1,48 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain
 {
     public class CategoryRepository
     {
-        private readonly ServiceDeskContext _content;
+        private readonly ServiceDeskContext _context;
 
         public CategoryRepository(ServiceDeskContext context)
         {
-            context = _content;
+            _context = context;
         }
 
         // CreateCategory
         public void CreateCategory(string user, string name)
         {
-            if (_content.Categories.Any(s => s.Name == name))
+            if (_context.Categories.Any(s => s.Name == name))
                 throw new InvalidOperationException($"Cannot create category {name} as it already exists");
 
             var category = new Category(user, name);
-            _content.Categories.Add(category);
+            _context.Categories.Add(category);
         }
 
         // DeleteCategory
         public void DeleteCategory(string name)
         {
-            var category = _content.Categories.FirstOrDefault(s => s.Name == name);
+            var category = _context.Categories.FirstOrDefault(s => s.Name == name);
             if (category == null)
                 throw new InvalidOperationException($"Cannot delete category {name} as it does not exist");
 
-            _content.Categories.Remove(category);
+            _context.Categories.Remove(category);
         }
 
         // GetAll
         public IReadOnlyCollection<Category> GetAll()
         {
-            return _context.Categories;
+            return _context.Categories.ToList();
         }
 
         // GetCategoryByName
         public Category GetCategoryByName(string name)
         {
-            var category = _content.Categories.FirstOrDefault(s => s.Name == name);
+            var category = _context.Categories.FirstOrDefault(s => s.Name == name);
             if (category == null)
                 throw new InvalidOperationException($"Cannot find category {name}");
             return category;
@@ -49,7 +51,7 @@ namespace Domain
         // Save
         public void Save()
         {
-            _content.SaveChanges();
+            _context.SaveChanges();
         }
     }
 }

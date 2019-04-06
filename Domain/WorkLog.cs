@@ -2,7 +2,7 @@
 
 namespace Domain
 {
-    public sealed class WorkLog : Entity
+    public class WorkLog : Entity
     {        
         public DateTime CreatedDate {get; set;}
         public string Creator {get; set;}

@@ -2,7 +2,7 @@ using System;
 
 namespace Domain
 {
-    public sealed class Document : Entity
+    public class Document : Entity
     {    
         public DateTime CreatedDate {get; set;}
         public string Creator {get; set;}        
@@ -17,6 +17,6 @@ namespace Domain
             this.FileIdentifier = fileIdentifier;
         }
 
-         protected Document() { }
+        protected Document() { }
     }
 }

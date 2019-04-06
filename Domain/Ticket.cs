@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Domain
 {
-    public sealed class Ticket : AggregateRoot
+    public class Ticket : AggregateRoot
     {
         public DateTime CreatedDate { get; private set; }
         public string Creator { get; private set; }
@@ -22,7 +24,7 @@ namespace Domain
 
         public virtual ICollection<Document> Documents { get; set; } // TODO Switch all collections to use backing field and expose as readonly 
 
-        public boolean IsReadOnly()
+        public bool IsReadOnly()
         {
             return this.Status == Status.Closed || this.Status == Status.Completed;
         }
@@ -47,8 +49,8 @@ namespace Domain
             this.Description = description;
             this.Categorisation = categorisation;            
             this.Status = Status.Unassigned;
-            ticket.Documents = new List<Document>();
-            ticket.WorkLogs = new List<WorkLog>();
+            this.Documents = new List<Document>();
+            this.WorkLogs = new List<WorkLog>();
         }
 
         protected Ticket() { } 
@@ -59,12 +61,12 @@ namespace Domain
             ReadOnlyCheck();
             NullCheck(user);
             NullCheck(filename);
-            if (date == null || data.Length == 0)
+            if (data == null || data.Length == 0)
                 throw new ArgumentNullException("File data has a length of zero");
 
             var fileIdentifier = Guid.NewGuid();
-            var path = Path.Combine("c:\temp", fileIdentifier);
-            using (FileStream stream = File.Open(path, FileMode.Create, File.Write))
+            var path = Path.Combine("c:\temp", fileIdentifier.ToString());
+            using (FileStream stream = File.Open(path, FileMode.Create, FileAccess.Write))
             {
                 stream.Write(data);
             }
@@ -77,10 +79,10 @@ namespace Domain
         {
             ReadOnlyCheck();
 
-            var document = this.Documents.FirstOrDefault(f => f.id == id);
+            var document = this.Documents.FirstOrDefault(f => f.Id == id);
             if (document != null)
             {
-                var path = Path.Combine("c:\temp", document.FileIdentifier);
+                var path = Path.Combine("c:\temp", document.FileIdentifier.ToString());
                 File.Delete(path);
                 this.Documents.Remove(document);
             }
@@ -96,13 +98,13 @@ namespace Domain
                 throw new Exception("Missing parameters");
 
             var worklog = new WorkLog(user, comment, timeSpent);
-            this.Worklogs.Add(worklog);
+            this.WorkLogs.Add(worklog);
         }
 
         // ReassignTicket
         public void ReassignTicket(string user, string assignee)
         {
-            if (this.IsReadOnly)
+            if (this.IsReadOnly())
                 return;
 
             this.AddWorklog(user, $"Ticket assigned to {assignee}", new TimeSpan());
@@ -113,7 +115,7 @@ namespace Domain
         // CloseTicket
         public void CloseTicket(string user)
         {
-            if (this.IsReadOnly)
+            if (this.IsReadOnly())
                 return;
 
             this.AddWorklog(user, $"Ticket closed", new TimeSpan());
@@ -123,7 +125,7 @@ namespace Domain
         // CompleteTicket
         public void CompleteTicket(string user)
         {
-            if (this.Status == Status.WorkInProgress || this.Status == Status.Paused)
+            if (this.Status == Status.InProgress || this.Status == Status.Paused)
             {
                 this.AddWorklog(user, $"Ticket completed", new TimeSpan());
                 this.Status = Status.Completed;
@@ -133,7 +135,7 @@ namespace Domain
         // PauseTicket
         public void PauseTicket(string user)
         {
-            if (this.Status == Status.WorkInProgress)
+            if (this.Status == Status.InProgress)
             {
                 this.AddWorklog(user, $"Ticket paused", new TimeSpan());
                 this.Status = Status.Paused;
@@ -146,13 +148,13 @@ namespace Domain
             if (this.Status == Status.Assigned)
             {
                 this.AddWorklog(user, $"Ticket work started", new TimeSpan());
-                this.Status = Status.WorkInProgress;
+                this.Status = Status.InProgress;
                 return;
             }
             if (this.Status == Status.Paused)
             {
                 this.AddWorklog(user, $"Ticket work resumed", new TimeSpan());
-                this.Status = Status.WorkInProgress;
+                this.Status = Status.InProgress;
                 return;
             }
         }
@@ -174,7 +176,7 @@ namespace Domain
 
         private void ReadOnlyCheck()
         {
-            if (this.IsReadOnly)
+            if (this.IsReadOnly())
                 throw new InvalidOperationException("Cannot update a read only ticket");
         }
     }

@@ -27,17 +27,17 @@ namespace Domain
 
         public static bool operator ==(Entity a, Entity b)
         {
-            
-            if (ReferenceEquals(a, null) && ReferenceEquals(b, null) )
+
+            if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
                 return true;
 
-            if (ReferenceEquals(a, null) || ReferenceEquals(b, null) )
+            if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
                 return false;
 
-                return a.Equals(b);
+            return a.Equals(b);
         }
-        
-        public static bool operator !=(Value<T> a, Value<T> b)
+
+        public static bool operator !=(Entity a, Entity b)
         {
             return !(a == b);
         }
@@ -46,10 +46,10 @@ namespace Domain
         {
             return (GetType().ToString() + Id).GetHashCode();
         }
-        
-        protected static void NullCheck(string value)
+
+        protected static void NullCheck(object value)
         {
-            if (string.IsNullOrEmpty(value))
+            if (value == null)
                 throw new ArgumentNullException($"Parameter {nameof(value)} cannot be null or empty");
         }
     }
