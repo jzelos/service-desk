@@ -1,31 +1,26 @@
-using System;
-using System.ComponentModel.DataAnnotations;
+using Domain.Entities.BaseClasses;
 
-namespace Domain
+namespace Domain.Entities
 {
     public class Source : Value<Source>
     {
-        [Key, Required]
-        public string Name { get; set; }
-
         public Source(
            string name)
         {
             NullCheck(name);
-
-            this.Name = name;
+            Name = name;
         }
 
-        protected Source() { }
+        public string Name { get; set; }
 
         protected override bool EqualsCore(Source other)
         {
-            return this.Name.Equals(other.Name);
+            return Name.Equals(other.Name);
         }
 
         protected override int GetHashCodeCore()
         {
-            return this.Name.GetHashCode();
+            return Name.GetHashCode();
         }
     }
 }
