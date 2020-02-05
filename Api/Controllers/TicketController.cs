@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
-using Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Persistance.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

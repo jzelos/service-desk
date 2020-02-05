@@ -1,12 +1,12 @@
 using Domain.Entities;
-using Domain.Repositories.BaseClasses;
 using Microsoft.EntityFrameworkCore;
+using Persistance.Repositories.BaseClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Domain.Repositories
+namespace Persistance.Repositories
 {
     public class SourceRepository : CrudRepository<Source>
     {

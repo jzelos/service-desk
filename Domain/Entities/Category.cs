@@ -8,7 +8,7 @@ namespace Domain.Entities
 {
     public class Category : Value<Category>
     {
-        private readonly List<Subcategory> _subcategories = new List<Subcategory>();
+        private readonly List<string> _subcategories = new List<string>();
 
         public Category(
             string name)
@@ -19,26 +19,26 @@ namespace Domain.Entities
 
         public string Name { get; set; }
 
-        public virtual ReadOnlyCollection<string> Subcategories => _subcategories.Select(s => s.Name).ToList().AsReadOnly();
+        public IReadOnlyCollection<string> Subcategories => _subcategories.AsReadOnly();
 
         public void AddSubcategory(string name)
         {
-            if (_subcategories.Any(s => s.Name == name))
+            if (_subcategories.Any(s => s == name))
                 throw new InvalidOperationException($"Cannot create subcatgory {name} as it already exists under category {Name}");
 
-            _subcategories.Add(new Subcategory(name));
+            _subcategories.Add(name);
         }
 
         public void RemoveSubcategory(string name)
         {
-            var subcategory = _subcategories.FirstOrDefault(s => s.Name == name);
+            var subcategory = _subcategories.FirstOrDefault(s => s == name);
             if (subcategory != null)
                 _subcategories.Remove(subcategory);
         }
 
         protected override bool EqualsCore(Category other)
         {
-            return Name.Equals(other.Name);
+            return Name.Equals(other.Name); // TODO Also Subcategories?
         }
 
         protected override int GetHashCodeCore()

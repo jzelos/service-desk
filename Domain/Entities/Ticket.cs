@@ -1,9 +1,6 @@
 ﻿using Domain.Entities.BaseClasses;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
 
 namespace Domain.Entities
 {
@@ -35,6 +32,10 @@ namespace Domain.Entities
             Status = Status.Unassigned;
         }
 
+        private Ticket()
+        {
+        } // EF
+
         public DateTime? AssignedDate { get; private set; }
         public string Assignee { get; private set; }
         public Categorisation Categorisation { get; private set; }
@@ -42,12 +43,12 @@ namespace Domain.Entities
         public string Creator { get; private set; }
         public string Description { get; private set; }
 
-        // public virtual ReadOnlyCollection<Document> Documents => _documents.AsReadOnly();
+        // public IReadOnlyCollection<Document> Documents => _documents.AsReadOnly();
         public string Source { get; private set; }
 
         public Status Status { get; private set; }
         public string Summary { get; private set; }
-        public virtual ReadOnlyCollection<WorkLog> WorkLogs => _workLogs.AsReadOnly();
+        public IReadOnlyCollection<WorkLog> WorkLogs => _workLogs.AsReadOnly();
 
         // Commands
         //public void AddDocument(string user, string filename, byte[] data)

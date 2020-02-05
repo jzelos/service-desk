@@ -1,7 +1,7 @@
 using Domain.Entities.BaseClasses;
 using System.Threading.Tasks;
 
-namespace Domain.Repositories.BaseClasses
+namespace Persistance.Repositories.BaseClasses
 {
     public abstract class Repository<T> where T : AggregateRoot
     {

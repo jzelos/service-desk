@@ -2,7 +2,7 @@ using Domain.Entities.BaseClasses;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Domain.Repositories.BaseClasses
+namespace Persistance.Repositories.BaseClasses
 {
     public abstract class CrudRepository<T> where T : Value<T>
     {

@@ -1,9 +1,7 @@
 using Domain.Entities.BaseClasses;
-using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Entities
 {
-    [Owned] // EF Core 2.0 inline entity
     public class Categorisation : Value<Categorisation>
     {
         public Categorisation(string category, string subcategory)

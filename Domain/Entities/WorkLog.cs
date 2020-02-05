@@ -7,15 +7,19 @@ namespace Domain.Entities
     {
         public WorkLog(string creator, string comment, TimeSpan timeSpent)
         {
-            CreatedDate = DateTime.Now;
+            CreatedDate = DateTime.UtcNow;
             Creator = creator;
             Comment = comment;
             TimeSpent = timeSpent;
         }
 
-        public string Comment { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public string Creator { get; set; }
-        public TimeSpan TimeSpent { get; set; }
+        private WorkLog()
+        {
+        } // EF
+
+        public string Comment { get; private set; }
+        public DateTime CreatedDate { get; private set; }
+        public string Creator { get; private set; }
+        public TimeSpan TimeSpent { get; private set; }
     }
 }
