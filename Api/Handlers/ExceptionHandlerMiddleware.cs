@@ -63,22 +63,9 @@ namespace Api.Handlers
                     problemDetails.Detail = ex.Message;
                 };
 
-                WriteJson(context.Response, problemDetails);
-            }
-        }
-
-        private void WriteJson<T>(HttpResponse response, T obj)
-        {
-            response.ContentType = "application/problem+json";
-            response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            using (var writer = new HttpResponseStreamWriter(response.Body, Encoding.UTF8))
-            {
-                using (var jsonWriter = new JsonTextWriter(writer))
-                {
-                    jsonWriter.CloseOutput = false;
-                    jsonWriter.AutoCompleteOnClose = false;
-                    Serializer.Serialize(jsonWriter, obj);
-                }
+                context.Response.ContentType = "application/problem+json";
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                await context.Response.WriteAsync(JsonConvert.SerializeObject(problemDetails));
             }
         }
     }
