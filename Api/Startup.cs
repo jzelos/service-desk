@@ -1,15 +1,17 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Api.Handlers;
+using Autofac;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json.Serialization;
-using Serilog;
 using Microsoft.Extensions.Hosting;
-using Api.Handlers;
-using Microsoft.EntityFrameworkCore;
-using System;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 using Persistance;
+using Serilog;
+using System;
+using System.Linq;
 
 namespace Api
 {
@@ -64,6 +66,18 @@ namespace Api
             });
         }
 
+        // Autofac container
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies()
+                .Where(w => w.FullName.StartsWith("Orbis"))
+                .ToArray();
+            builder.RegisterAssemblyTypes(assemblies)
+                   //  .Where(t => t.Namespace != null && t.Namespace.StartsWith("Orbis"))
+                   //  .AsImplementedInterfaces()
+                   .InstancePerLifetimeScope();
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -89,14 +103,8 @@ namespace Api
                     maxRetryDelay: TimeSpan.FromSeconds(5),
                     errorNumbersToAdd: null);
             }));
-        }
 
-        //private void InitializeDatabase(IApplicationBuilder app)
-        //{
-        //    using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-        //    {
-        //        scope.ServiceProvider.GetRequiredService<ServiceDeskContext>().Database.Migrate();
-        //    }
-        //}
+            //services.AddOptions(); // to do with binding configuration, optional
+        }
     }
 }

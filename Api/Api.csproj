@@ -3,9 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <RootNamespace>Orbis.Housing.ServiceDesk.Api</RootNamespace>
+    <AssemblyName>Orbis.Housing.ServiceDesk.Api</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>    
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />    
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.1" />    
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
     <PackageReference Include="Serilog" Version="2.9.0" />

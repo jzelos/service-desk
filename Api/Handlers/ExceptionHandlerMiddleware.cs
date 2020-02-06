@@ -2,13 +2,11 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
 using Serilog;
 using System;
 using System.Net;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Api.Handlers

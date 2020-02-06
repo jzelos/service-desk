@@ -1,6 +1,5 @@
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Persistance;
 using Persistance.Repositories.BaseClasses;
 using System.Collections.Generic;
 using System.Linq;

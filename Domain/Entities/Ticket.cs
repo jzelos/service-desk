@@ -17,11 +17,11 @@ namespace Domain.Entities
             string description,
             Categorisation categorisation)
         {
-            NullCheck(creator);
-            NullCheck(source);
-            NullCheck(summary);
-            NullCheck(description);
-            NullCheck(categorisation);
+            // NullCheck(creator);
+            //  NullCheck(source);
+            //  NullCheck(summary);
+            //   NullCheck(description);
+            //   NullCheck(categorisation);
 
             CreatedDate = createdDate;
             Creator = creator;

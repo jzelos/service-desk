@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Orbis.Housing.ServiceDesk.Domain</RootNamespace>
+    <AssemblyName>Orbis.Housing.ServiceDesk.Domain</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
