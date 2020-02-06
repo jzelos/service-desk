@@ -1,6 +1,6 @@
 using System;
 
-namespace Domain.Entities.BaseClasses
+namespace Orbis.Housing.ServiceDesk.Domain.Entities.BaseClasses
 {
     public abstract class Entity
     {
@@ -42,12 +42,6 @@ namespace Domain.Entities.BaseClasses
         public override int GetHashCode()
         {
             return (GetType().ToString() + Id).GetHashCode();
-        }
-
-        protected static void NullCheck(object value)
-        {
-            if (value == null)
-                throw new ArgumentNullException($"Parameter {nameof(value)} cannot be null or empty");
         }
     }
 }

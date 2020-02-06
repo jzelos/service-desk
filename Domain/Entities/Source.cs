@@ -1,13 +1,15 @@
-using Domain.Entities.BaseClasses;
+using Orbis.Housing.ServiceDesk.Domain.Entities.BaseClasses;
+using Orbis.Housing.ServiceDesk.Domain.Utilities;
 
-namespace Domain.Entities
+namespace Orbis.Housing.ServiceDesk.Domain.Entities
 {
     public class Source : Value<Source>
     {
         public Source(
            string name)
         {
-            NullCheck(name);
+            Guard.NotNullOrEmpty(name, nameof(name));
+
             Name = name;
         }
 

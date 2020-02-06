@@ -1,4 +1,4 @@
-using Domain.Entities.BaseClasses;
+using Orbis.Housing.ServiceDesk.Domain.Entities.BaseClasses;
 using System.Threading.Tasks;
 
 namespace Persistance.Repositories.BaseClasses

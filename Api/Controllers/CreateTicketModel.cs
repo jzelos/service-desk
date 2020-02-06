@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Orbis.Housing.ServiceDesk.Domain.Entities;
 
 namespace Api.Controllers
 {

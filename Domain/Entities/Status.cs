@@ -1,4 +1,4 @@
-namespace Domain.Entities
+namespace Orbis.Housing.ServiceDesk.Domain.Entities
 {
     public enum Status
     {

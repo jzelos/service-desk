@@ -48,7 +48,7 @@ namespace Api.Handlers
                     Instance = $"urn:orbis.housing.servicedesk:error:{Guid.NewGuid()}"
                 };
 
-                if (ex is BadHttpRequestException badHttpRequestException) // Kestral Internal Exceptions like 400 codes
+                if (ex is BadHttpRequestException badHttpRequestException) // Kestral Internal Exceptions like 400 codes, TODO should argument exceptions be 400 codes?
                 {
                     problemDetails.Title = "Invalid request";
                     problemDetails.Status = (int)typeof(BadHttpRequestException).GetProperty("StatusCode", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(badHttpRequestException);

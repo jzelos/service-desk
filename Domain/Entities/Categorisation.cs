@@ -1,13 +1,14 @@
-using Domain.Entities.BaseClasses;
+using Orbis.Housing.ServiceDesk.Domain.Entities.BaseClasses;
+using Orbis.Housing.ServiceDesk.Domain.Utilities;
 
-namespace Domain.Entities
+namespace Orbis.Housing.ServiceDesk.Domain.Entities
 {
     public class Categorisation : Value<Categorisation>
     {
         public Categorisation(string category, string subcategory)
         {
-            NullCheck(category);
-            NullCheck(subcategory);
+            Guard.NotNullOrEmpty(category, nameof(category));
+            Guard.NotNullOrEmpty(subcategory, nameof(subcategory));
 
             Category = category;
             Subcategory = subcategory;

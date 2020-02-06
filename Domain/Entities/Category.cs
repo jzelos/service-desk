@@ -1,9 +1,10 @@
-using Domain.Entities.BaseClasses;
+using Orbis.Housing.ServiceDesk.Domain.Entities.BaseClasses;
+using Orbis.Housing.ServiceDesk.Domain.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Domain.Entities
+namespace Orbis.Housing.ServiceDesk.Domain.Entities
 {
     public class Category : Value<Category>
     {
@@ -12,7 +13,8 @@ namespace Domain.Entities
         public Category(
             string name)
         {
-            NullCheck(name);
+            Guard.NotNullOrEmpty(name, nameof(name));
+
             Name = name;
         }
 
@@ -22,6 +24,8 @@ namespace Domain.Entities
 
         public void AddSubcategory(string name)
         {
+            Guard.NotNullOrEmpty(name, nameof(name));
+
             if (_subcategories.Any(s => s == name))
                 throw new InvalidOperationException($"Cannot create subcatgory {name} as it already exists under category {Name}");
 

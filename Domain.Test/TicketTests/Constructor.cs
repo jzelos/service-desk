@@ -1,6 +1,6 @@
-using Domain.Entities;
 using FluentAssertions;
 using NUnit.Framework;
+using Orbis.Housing.ServiceDesk.Domain.Entities;
 using System;
 
 namespace Domain.Test
@@ -10,12 +10,12 @@ namespace Domain.Test
         [Test]
         public void CreatesNewTicket()
         {
-            var now = new DateTime(2020, 1, 1);
+            // var now = new DateTime(2020, 1, 1);
             var catagorisation = new Categorisation("category", "subcategory");
-            var ticket = new Ticket("creator", now, "source", "summary", "description", catagorisation);
+            var ticket = new Ticket("creator", "source", "summary", "description", catagorisation);
 
             ticket.Creator.Should().Be("creator");
-            ticket.CreatedDate.Should().Be(now);
+            //  ticket.CreatedDate.Should().Be(now);
             ticket.Source.Should().Be("source");
             ticket.Summary.Should().Be("summary");
             ticket.Description.Should().Be("description");

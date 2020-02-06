@@ -1,8 +1,9 @@
-﻿using Domain.Entities.BaseClasses;
+﻿using Orbis.Housing.ServiceDesk.Domain.Entities.BaseClasses;
+using Orbis.Housing.ServiceDesk.Domain.Utilities;
 using System;
 using System.Collections.Generic;
 
-namespace Domain.Entities
+namespace Orbis.Housing.ServiceDesk.Domain.Entities
 {
     public class Ticket : AggregateRoot
     {
@@ -11,19 +12,18 @@ namespace Domain.Entities
 
         public Ticket(
             string creator,
-            DateTime createdDate,
             string source,
             string summary,
             string description,
             Categorisation categorisation)
         {
-            // NullCheck(creator);
-            //  NullCheck(source);
-            //  NullCheck(summary);
-            //   NullCheck(description);
-            //   NullCheck(categorisation);
+            Guard.NotNullOrEmpty(creator, nameof(creator));
+            Guard.NotNullOrEmpty(source, nameof(source));
+            Guard.NotNullOrEmpty(summary, nameof(summary));
+            Guard.NotNullOrEmpty(description, nameof(description));
+            Guard.NotNull(categorisation, nameof(categorisation));
 
-            CreatedDate = createdDate;
+            CreatedDate = DateTime.UtcNow;
             Creator = creator;
             Source = source;
             Description = description;
@@ -160,10 +160,11 @@ namespace Domain.Entities
         public void UpdateTicket(string source, string summary, string description, Categorisation categorisation)
         {
             ReadOnlyCheck();
-            NullCheck(source);
-            NullCheck(summary);
-            NullCheck(description);
-            NullCheck(categorisation);
+
+            Guard.NotNullOrEmpty(source, nameof(source));
+            Guard.NotNullOrEmpty(summary, nameof(summary));
+            Guard.NotNullOrEmpty(description, nameof(description));
+            Guard.NotNull(categorisation, nameof(categorisation));
 
             Source = source;
             Summary = summary;

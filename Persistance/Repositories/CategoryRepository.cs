@@ -1,5 +1,5 @@
-using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Orbis.Housing.ServiceDesk.Domain.Entities;
 using Persistance.Repositories.BaseClasses;
 using System;
 using System.Collections.Generic;

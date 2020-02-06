@@ -1,4 +1,4 @@
-namespace Domain.Entities.BaseClasses
+namespace Orbis.Housing.ServiceDesk.Domain.Entities.BaseClasses
 {
     public abstract class AggregateRoot : Entity
     {

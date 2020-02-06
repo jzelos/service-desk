@@ -1,5 +1,5 @@
-﻿using Domain.Entities;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Orbis.Housing.ServiceDesk.Domain.Entities;
 using Persistance.Repositories;
 using System;
 using System.Collections.Generic;
@@ -29,8 +29,7 @@ namespace Api.Controllers
         public async Task CreateTicket([FromBody] CreateTicketModel model)
         {
             var ticket = new Ticket(
-                "me",
-                DateTime.UtcNow,
+                model.Creator,
                 model.Source,
                 model.Summary,
                 model.Description,
