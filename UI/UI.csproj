@@ -27,7 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\NewFolder\" />
+    <None Remove="ClientApp\src\Components\TicketList.tsx" />
+    <None Remove="ClientApp\src\Components\TicketListItem.tsx" />
+    <None Remove="ClientApp\src\Models\TicketListItem.ts" />
+    <None Remove="ClientApp\src\Pages\MyTicketsPage\MyTicketsComponent.tsx" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
