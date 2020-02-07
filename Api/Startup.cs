@@ -60,6 +60,7 @@ namespace Api
 
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCors();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
@@ -91,6 +92,14 @@ namespace Api
                     options.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
                     options.SerializerSettings.Converters.Add(new StringEnumConverter());
                 });
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyHeader(); // TODO Dev only
+                });
+            });
 
             services.AddSwaggerGen(c =>
             {

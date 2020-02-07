@@ -50,13 +50,19 @@ namespace Api.Controllers
             return Ok(await _categoryRepository.Get());
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<string>>> GetMyTickets()
+        {
+            return Ok(await _ticketRepository.GetAllByAssignee("jay"));
+        }
+
         [HttpGet("sources")]
         public async Task<ActionResult<string>> GetSources()
         {
             return Ok(await _sourceRepository.GetSourceNames());
         }
 
-        [HttpGet]
+        [HttpGet("unassigned")]
         public async Task<ActionResult<IEnumerable<string>>> GetUnassigned()
         {
             return Ok(await _ticketRepository.GetAllUnassigned());

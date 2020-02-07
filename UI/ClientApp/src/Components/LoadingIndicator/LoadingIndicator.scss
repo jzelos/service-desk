@@ -1,0 +1,29 @@
+@keyframes loading-indicator-spinner-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-indicator {      
+    display: flex;
+    align-items: center;  
+    flex-flow: row wrap;
+    padding:2em 2em;
+}
+
+.loading-indicator img {
+    display:block;
+    margin:auto;
+    animation: loading-indicator-spinner-animation 1s linear infinite;
+}
+ 
+.loading-indicator p {   
+    width:100%;
+    margin-top:2.4em;
+    font-size:1.2em;
+    text-align:center;
+}
+

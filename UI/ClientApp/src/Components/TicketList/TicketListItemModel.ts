@@ -1,5 +1,6 @@
 ﻿export interface TicketListItemModel {
-    created: Date;
+    id: number;
+    createdDate: Date;
     assignee: string;
     summary: string;
     status: string;
