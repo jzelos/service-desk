@@ -1,16 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import MyTicketsComponent from './Pages/MyTicketsPage/MyTicketsComponent';
+import NavBarComponent from './Pages/NavBarComponent';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import UnassignedRequestsComponent from './Pages/UnassignedRequestsComponent';
+import MyRequestsComponent from './Pages/MyRequestsComponent';
+import MyTeamsRequestsComponent from './Pages/MyTeamsRequestsComponent';
 
 const App = () => {
   return (
-    <div className="app">
-      <header>  
-        <span>Service Desk Test</span>
-      </header>
-      <div className="body">
-        <MyTicketsComponent />
+    <div className="app"> 
+      <NavBarComponent />
+      <div className="body">                
+        <Router>
+          <Route path="/myrequests" component={MyRequestsComponent} />
+          <Route path="/myteamsrequests" component={MyTeamsRequestsComponent} />
+          <Route path="/unassignedrequests" component={UnassignedRequestsComponent} />
+        </Router>
       </div>            
     </div>
   );
