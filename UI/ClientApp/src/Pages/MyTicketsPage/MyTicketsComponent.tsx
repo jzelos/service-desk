@@ -32,8 +32,8 @@ export default class MyTicketsComponent extends PureComponent {
                 });
             });  
             
-            fetch("http://localhost:58699/api/ticket/unassigned")
-            .then(res => res.text().then(s => JSON.parse(s, reviver))) 
+        fetch("http://localhost:58699/api/ticket/unassigned")
+            .then(res => res.text().then(s => JSON.parse(s, reviver)))             
             .then(
             (result: TicketListItemModel[]) => {
                 this.setState({

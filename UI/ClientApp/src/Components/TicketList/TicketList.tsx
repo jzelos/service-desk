@@ -1,6 +1,5 @@
 ﻿import React, { PureComponent } from 'react';
 import { TicketListItemModel } from './TicketListItemModel';
-import TicketListItem from './TicketListItem';
 import BootstrapTable, { Column } from 'react-bootstrap-table-next';
 import filterFactory, { dateFilter, textFilter, numberFilter } from 'react-bootstrap-table2-filter';
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
@@ -8,7 +7,14 @@ import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css
 // TODO switch out hard coded table columns with component that accepts array of field names
 // IE. <td>{ticket[fieldname]}/td>
 
+// https://examples.bootstrap-table.com/#welcomes/from-data.html
+// https://react-bootstrap.github.io/components/spinners/ - looks very good
+
 export default class TicketList extends PureComponent<{ tickets: TicketListItemModel[] }> {
+
+    dateFormatter = (cell: Date, row: TicketListItemModel, rowIndex: number, formatExtraData: any) => {
+        return cell.toDateString();      
+    }
 
     columns = [{
         dataField: 'id',
@@ -17,8 +23,10 @@ export default class TicketList extends PureComponent<{ tickets: TicketListItemM
         filter: numberFilter()
     }, {
         dataField: 'createdDate',
+        type:'date',
         text: 'Date Created',
         sort: true, 
+        formatter: this.dateFormatter,
         filter: dateFilter()
     }, {
         dataField: 'assignee',
@@ -41,23 +49,6 @@ export default class TicketList extends PureComponent<{ tickets: TicketListItemM
 
 
     render() {
-        return (
-            <div>
-{/*                 <table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Created</th>
-                            <th>Assignee</th>
-                            <th>Status</th>
-                            <th>Summary</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.props.tickets.map((item, key) => <TicketListItem ticket={item} key={item.id} />)}
-                    </tbody>
-                </table> */}
-                <BootstrapTable keyField='id' data={this.props.tickets} columns={this.columns as Column[]}  filter={ filterFactory() } />
-            </div>)
+        return (<BootstrapTable keyField='id' data={this.props.tickets} columns={this.columns as Column[]}  filter={ filterFactory()} /> )
     }
 }
