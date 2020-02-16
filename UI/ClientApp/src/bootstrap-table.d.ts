@@ -254,9 +254,12 @@ type Overlay = TODO;
 // SELECT AND EXPAND
 
 interface SelectRowOptions {
-  mode: "checkbox";
+  mode: string;
   clickToSelect: boolean;
+  hideSelectColumn: boolean;
+  onSelect: (row: any, isSelect: boolean, rowIndex: number, e: any) => void | boolean
 }
+
 interface ExpandRowOptions {
   renderer: (row: any) => JSX.Element;
   showExpandColumn?: boolean;
@@ -301,6 +304,8 @@ There is a special case for remote pagination, even you only specified the pagin
     remote?: boolean | RemoteProps;
     /**true to indicate your bootstrap version is 4. Default version is 3. */
     bootstrap4?: boolean;
+    /**Same as bootstrap .table-bordered class for adding borders to a table and table cells. */
+    bordered ?: boolean;
     /**noDataIndication should be a callback function which return anything that will be showed in the table when data is empty. */
     noDataIndication?(): JSX.Element;
     /**Telling if table is loading or not, for example: waiting data loading, filtering etc. It's only valid when remote is enabled. When loading is true, react-bootstrap-table2 will attend to render a overlay on table via overlay prop, if overlay prop is not given, react-bootstrap-table2 will ignore the overlay rendering. */

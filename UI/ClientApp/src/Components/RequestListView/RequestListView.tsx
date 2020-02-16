@@ -1,18 +1,20 @@
 ﻿import React, { PureComponent } from 'react';
-import { TicketListItemModel } from './TicketListItemModel';
+import { RequestItem } from './RequestItem';
 import BootstrapTable, { Column } from 'react-bootstrap-table-next';
 import filterFactory, { dateFilter, textFilter, numberFilter } from 'react-bootstrap-table2-filter';
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
 
-// TODO switch out hard coded table columns with component that accepts array of field names
-// IE. <td>{ticket[fieldname]}/td>
-
 // https://examples.bootstrap-table.com/#welcomes/from-data.html
 // https://react-bootstrap.github.io/components/spinners/ - looks very good
 
-export default class TicketList extends PureComponent<{ tickets: TicketListItemModel[] }> {
+interface Props {
+    tickets: RequestItem[], 
+    onRowSelected?: (row: RequestItem) => void 
+}
 
-    dateFormatter = (cell: Date, row: TicketListItemModel, rowIndex: number, formatExtraData: any) => {
+export default class RequestListView extends PureComponent<Props> {
+
+    dateFormatter = (cell: Date, row: RequestItem, rowIndex: number, formatExtraData: any) => {
         return cell.toDateString();      
     }
 
@@ -47,8 +49,28 @@ export default class TicketList extends PureComponent<{ tickets: TicketListItemM
         filter: textFilter()
     }];
 
+    selectRow = {
+        mode: 'checkbox',
+        onSelect: (row: RequestItem, isSelect: boolean, rowIndex: number, e: any) => {            
+            if (this.props.onRowSelected)
+                this.props.onRowSelected(row);            
+            return false;             
+        }, 
+        clickToSelect: true,
+        hideSelectColumn: true
+      };
+
 
     render() {
-        return (<BootstrapTable keyField='id' data={this.props.tickets} columns={this.columns as Column[]}  filter={ filterFactory()} /> )
+        return (<BootstrapTable 
+            bootstrap4={true} 
+            striped={false} 
+            bordered={true} 
+            hover={true}
+            selectRow={this.selectRow}
+            keyField='id' 
+            data={this.props.tickets} 
+            columns={this.columns as Column[]} 
+            filter={ filterFactory()} />)
     }
 }

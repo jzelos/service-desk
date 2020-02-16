@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
-import TicketViewComponent from './TicketViewComponent';
+import RequestListViewContainer from '../Components/RequestListView/RequestListViewContainer';
 
 export default class MyTeamsRequestsComponent extends PureComponent {
     render() {
-        return (<TicketViewComponent url="http://localhost:58699/api/ticket/myteam" title="My teams requests" />)
+        return (<RequestListViewContainer url="http://localhost:58699/api/ticket/myteam" title="My teams requests" />)
     }
 }

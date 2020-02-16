@@ -1,4 +1,4 @@
-﻿export interface TicketListItemModel {
+﻿export interface RequestItem {
     id: number;
     createdDate: Date;
     assignee: string;
