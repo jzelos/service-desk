@@ -5,6 +5,7 @@ import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import UnassignedRequestsComponent from './Pages/UnassignedRequestsComponent';
 import MyRequestsComponent from './Pages/MyRequestsComponent';
 import MyTeamsRequestsComponent from './Pages/MyTeamsRequestsComponent';
+import EditRequestContainer from './Components/EditRequest/EditRequestContainer';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="/myrequests" component={MyRequestsComponent} />
           <Route path="/myteamsrequests" component={MyTeamsRequestsComponent} />
           <Route path="/unassignedrequests" component={UnassignedRequestsComponent} />
+          <Route path="/editrequest" component={EditRequestContainer} />
         </Router>
       </div>            
     </div>

@@ -28,7 +28,7 @@ export default class EditRequestContainer extends PureComponent<Props> {
 
     componentDidMount() {
         if (this.props.requestId) {
-            fetch("http://localhost:58699/api/Ticket/" + this.props.requestId.toString())
+            fetch("https://localhost:5001/api/Ticket/" + this.props.requestId.toString())
                 .then(res => res.text().then(s => JSON.parse(s, reviver)))             
                 .then(
                 (result: RequestItem) => {

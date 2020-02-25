@@ -22,7 +22,7 @@ export default class NavBarComponent extends PureComponent {
                     <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                 </NavDropdown> */}
                 </Nav>
-                <Button variant="outline-success">Create Ticket</Button>
+                <Button variant="outline-success" href="editrequest">New Request</Button>
             </Navbar.Collapse>
             </Navbar>);
     }

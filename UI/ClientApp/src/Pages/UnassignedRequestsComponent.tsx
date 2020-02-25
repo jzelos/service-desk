@@ -3,6 +3,6 @@ import RequestListViewContainer from '../Components/RequestListView/RequestListV
 
 export default class UnassignedRequestsComponent extends PureComponent {
     render() {
-        return (<RequestListViewContainer url="http://localhost:58699/api/ticket/unassigned" title="Unassigned requests" />)
+        return (<RequestListViewContainer url="https://localhost:5001/api/ticket/unassigned" title="Unassigned requests" />)
     }
 }
